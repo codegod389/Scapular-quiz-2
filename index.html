@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scapula Anatomy Quiz 2: Muscular Attachments</title>
+    <style>
+        :root {
+            --primary: #2c5282;
+            --secondary: #3182ce;
+            --accent: #63b3ed;
+            --light: #ebf8ff;
+            --dark: #1a365d;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(44, 82, 130, 0.85), rgba(44, 82, 130, 0.9)), 
+                        url('https://i.ibb.co/VW0XLwfG/t9duylpwvxf61.jpg') center/cover fixed;
+            color: #2d3748;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .questions-section {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .answer-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .answer-section.visible {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-number::before {
+            content: "Q";
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            background: white;
+        }
+        
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background-color: #e6fffa;
+            border-color: var(--secondary);
+            box-shadow: 0 4px 8px rgba(49, 130, 206, 0.1);
+        }
+        
+        .option.correct {
+            background-color: #f0fff4;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: #fff5f5;
+            border-color: var(--danger);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            flex: 2;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reset-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            flex: 1;
+        }
+        
+        .reset-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+        
+        .results-section {
+            margin-top: 40px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .score-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 25px 15px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .passed .stat-value {
+            color: var(--success);
+        }
+        
+        .failed .stat-value {
+            color: var(--danger);
+        }
+        
+        .attempted .stat-value {
+            color: var(--secondary);
+        }
+        
+        .answer-bank {
+            margin-top: 40px;
+        }
+        
+        .answer-item {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .answer-correct {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .answer-incorrect {
+            color: var(--danger);
+        }
+        
+        .clinical-note {
+            background: #fffaf0;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        
+        .anatomy-highlight {
+            background: #e6fffa;
+            border-left: 4px solid var(--success);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .support-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .support-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .support-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .share-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn-small {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-twitter {
+            background-color: #1DA1F2;
+            color: white;
+        }
+        
+        .share-facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+        
+        .share-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .share-copy {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 1200px) {
+            .quiz-container {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn-small {
+                width: 250px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .score-value {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scapula Anatomy Quiz 2: Muscular Attachments</h1>
+            <p class="subtitle">40 Advanced Questions on Scapular Muscle Origins, Insertions & Functions</p>
+            <div class="difficulty-badge">ADVANCED LEVEL</div>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-value">40</div>
+                <div class="info-label">Muscle Questions</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Scapular Muscles</div>
+                <div class="info-label">Focus Area</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Origins & Insertions</div>
+                <div class="info-label">Key Focus</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="questions-section" id="questions-section">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <div class="answer-section" id="answer-section">
+                <h2>Answer Bank</h2>
+                <p>Check your answers after completing the quiz</p>
+                <div id="answer-bank">
+                    <!-- Answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="reset-btn" id="reset-btn">Reset Quiz</button>
+            <button class="submit-btn" id="submit-btn">Submit Answers</button>
+        </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="score-display">
+                <h2>Your Score</h2>
+                <div class="score-value" id="score-value">0/40</div>
+                <p>Scapula Anatomy Quiz 2: Muscular Attachments</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box attempted">
+                    <div class="stat-value" id="attempted-value">0</div>
+                    <div class="stat-label">Questions Attempted</div>
+                </div>
+                <div class="stat-box passed">
+                    <div class="stat-value" id="passed-value">0</div>
+                    <div class="stat-label">Questions Passed</div>
+                </div>
+                <div class="stat-box failed">
+                    <div class="stat-value" id="failed-value">0</div>
+                    <div class="stat-label">Questions Failed</div>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <h3>Share Your Results</h3>
+                <div class="share-buttons">
+                    <button class="share-btn-small share-twitter" id="share-twitter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                        Twitter
+                    </button>
+                    <button class="share-btn-small share-facebook" id="share-facebook">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                        Facebook
+                    </button>
+                    <button class="share-btn-small share-whatsapp" id="share-whatsapp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.017 2.047c-2.724 0-5.443 1.042-7.513 3.112-4.163 4.163-4.163 10.92 0 15.083 2.07 2.07 4.789 3.112 7.513 3.112s5.443-1.042 7.513-3.112c4.163-4.163 4.163-10.92 0-15.083-2.07-2.07-4.789-3.112-7.513-3.112zm-3.017 15.953l-1.516-1.516 3.035-3.035-3.035-3.035 1.516-1.516 3.035 3.035 3.035-3.035 1.516 1.516-3.035 3.035 3.035 3.035-1.516 1.516-3.035-3.035-3.035 3.035z"/>
+                        </svg>
+                        WhatsApp
+                    </button>
+                    <button class="share-btn-small share-copy" id="share-copy">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 1h-12c-1.1 0-2 .9-2 2v14h2v-14h12v-2zm3 4h-11c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm0 16h-11v-14h11v14z"/>
+                        </svg>
+                        Copy Results
+                    </button>
+                </div>
+            </div>
+            
+            <div class="answer-bank">
+                <h3>Detailed Answers with Clinical Correlations</h3>
+                <div id="detailed-answers">
+                    <!-- Detailed answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="support-section">
+            <h3>Follow Code God to support more medical quizzes</h3>
+            <a href="https://www.tiktok.com/@code.god3?_r=1&_d=ZS-91SF7FxgGKu" target="_blank" class="support-link">Follow on TikTok</a>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions and answers for Scapular Muscular Attachments
+        const quizData = [
+            {
+                question: "Which muscle originates from the supraspinous fossa of the scapula?",
+                options: [
+                    "Infraspinatus",
+                    "Supraspinatus", 
+                    "Teres minor",
+                    "Subscapularis"
+                ],
+                correct: 1,
+                explanation: "The supraspinatus muscle originates from the supraspinous fossa of the scapula and inserts on the superior facet of the greater tubercle of the humerus. It initiates shoulder abduction (0-15°) and is a key rotator cuff muscle."
+            },
+            {
+                question: "Which muscle inserts on the greater tubercle of the humerus and originates from the infraspinous fossa?",
+                options: [
+                    "Supraspinatus",
+                    "Infraspinatus",
+                    "Teres major", 
+                    "Subscapularis"
+                ],
+                correct: 1,
+                explanation: "The infraspinatus originates from the infraspinous fossa of the scapula and inserts on the middle facet of the greater tubercle. It's the primary external rotator of the shoulder and a key rotator cuff muscle."
+            },
+            {
+                question: "What is the origin of the subscapularis muscle?",
+                options: [
+                    "Supraspinous fossa",
+                    "Infraspinous fossa", 
+                    "Subscapular fossa",
+                    "Teres major tuberosity"
+                ],
+                correct: 2,
+                explanation: "The subscapularis originates from the subscapular fossa (anterior surface of scapula) and inserts on the lesser tubercle of the humerus. It's the strongest internal rotator and largest rotator cuff muscle."
+            },
+            {
+                question: "Which muscle originates from the lateral border of the scapula and inserts on the greater tubercle?",
+                options: [
+                    "Teres major",
+                    "Teres minor", 
+                    "Infraspinatus",
+                    "Supraspinatus"
+                ],
+                correct: 1,
+                explanation: "Teres minor originates from the upper 2/3 of the lateral border of the scapula and inserts on the inferior facet of the greater tubercle. It assists in external rotation and adduction of the shoulder."
+            },
+            {
+                question: "Where does the teres major muscle originate from the scapula?",
+                options: [
+                    "Superior angle",
+                    "Inferior angle and lower 1/3 of lateral border", 
+                    "Medial border",
+                    "Coracoid process"
+                ],
+                correct: 1,
+                explanation: "Teres major originates from the dorsal surface of the inferior angle and lower 1/3 of the lateral border of the scapula. It inserts on the medial lip of the intertubercular groove and functions in internal rotation, adduction, and extension."
+            },
+            {
+                question: "Which part of the trapezius muscle inserts on the spine of the scapula?",
+                options: [
+                    "Superior fibers",
+                    "Middle fibers", 
+                    "Inferior fibers",
+                    "All fibers insert on scapular spine"
+                ],
+                correct: 1,
+                explanation: "The middle fibers of trapezius insert on the medial acromion and superior lip of the scapular spine. The superior fibers insert on the lateral clavicle, and inferior fibers insert on the base of the scapular spine."
+            },
+            {
+                question: "What is the scapular origin of the long head of the biceps brachii?",
+                options: [
+                    "Coracoid process",
+                    "Supraglenoid tubercle", 
+                    "Infraglenoid tubercle",
+                    "Acromion process"
+                ],
+                correct: 1,
+                explanation: "The long head of biceps brachii originates from the supraglenoid tubercle of the scapula and passes through the intertubercular groove. It functions in elbow flexion and forearm supination."
+            },
+            {
+                question: "Which muscle originates from the coracoid process of the scapula?",
+                options: [
+                    "Biceps brachii long head",
+                    "Triceps brachii long head", 
+                    "Coracobrachialis",
+                    "Deltoid"
+                ],
+                correct: 2,
+                explanation: "Coracobrachialis originates from the coracoid process (with the short head of biceps) and inserts on the medial humerus. It functions in shoulder flexion and adduction."
+            },
+            {
+                question: "Where does the long head of triceps brachii originate from the scapula?",
+                options: [
+                    "Supraglenoid tubercle",
+                    "Infraglenoid tubercle", 
+                    "Coracoid process",
+                    "Lateral border"
+                ],
+                correct: 1,
+                explanation: "The long head of triceps brachii originates from the infraglenoid tubercle of the scapula. It's the only triceps head that crosses both shoulder and elbow joints, assisting in shoulder extension."
+            },
+            {
+                question: "Which muscle inserts on the medial border of the scapula?",
+                options: [
+                    "Serratus anterior",
+                    "Rhomboid major", 
+                    "Levator scapulae",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Multiple muscles insert on the medial border: rhomboid major (spinous processes to medial border), rhomboid minor (C7-T1 to medial border), and levator scapulae (transverse processes to superior medial border)."
+            },
+            {
+                question: "What is the primary function of the serratus anterior muscle in relation to the scapula?",
+                options: [
+                    "Scapular retraction",
+                    "Scapular protraction and upward rotation", 
+                    "Scapular elevation",
+                    "Scapular depression"
+                ],
+                correct: 1,
+                explanation: "Serratus anterior originates from ribs 1-8 and inserts on the costal surface of the medial scapular border. It's the prime mover for scapular protraction and upward rotation, essential for overhead activities."
+            },
+            {
+                question: "Which muscle originates from the transverse processes of C1-C4 and inserts on the superior medial scapular border?",
+                options: [
+                    "Rhomboid major",
+                    "Rhomboid minor", 
+                    "Levator scapulae",
+                    "Trapezius"
+                ],
+                correct: 2,
+                explanation: "Levator scapulae originates from transverse processes of C1-C4 and inserts on the superior medial border of the scapula. It elevates and downwardly rotates the scapula."
+            },
+            {
+                question: "Where does the deltoid muscle originate from the scapula?",
+                options: [
+                    "Medial border only",
+                    "Lateral border only", 
+                    "Inferior angle only",
+                    "Lateral clavicle, acromion, and scapular spine"
+                ],
+                correct: 3,
+                correct: 3,
+                explanation: "The deltoid has three origins: anterior fibers from lateral clavicle, middle fibers from acromion, and posterior fibers from spine of scapula. All insert on the deltoid tuberosity of humerus."
+            },
+            {
+                question: "Which muscle is known as the 'boxer's muscle' due to its role in scapular protraction?",
+                options: [
+                    "Trapezius",
+                    "Rhomboid major", 
+                    "Serratus anterior",
+                    "Pectoralis minor"
+                ],
+                correct: 2,
+                explanation: "Serratus anterior is called the 'boxer's muscle' because its strong contraction during punching movements protracts the scapula. Paralysis causes winging scapula."
+            },
+            {
+                question: "What is the origin of the omohyoid muscle from the scapula?",
+                options: [
+                    "Superior border",
+                    "Superior transverse ligament near suprascapular notch", 
+                    "Coracoid process",
+                    "Medial border"
+                ],
+                correct: 1,
+                explanation: "The inferior belly of omohyoid originates from the superior border of the scapula near the suprascapular notch. It's an infrahyoid muscle that depresses the hyoid bone."
+            },
+            {
+                question: "Which rotator cuff muscle does NOT attach to the greater tubercle?",
+                options: [
+                    "Supraspinatus",
+                    "Infraspinatus", 
+                    "Teres minor",
+                    "Subscapularis"
+                ],
+                correct: 3,
+                explanation: "Subscapularis is the only rotator cuff muscle that inserts on the lesser tubercle rather than the greater tubercle. This insertion allows it to function as the primary internal rotator."
+            },
+            {
+                question: "What nerve innervates the supraspinatus and infraspinatus muscles?",
+                options: [
+                    "Axillary nerve",
+                    "Suprascapular nerve", 
+                    "Dorsal scapular nerve",
+                    "Long thoracic nerve"
+                ],
+                correct: 1,
+                explanation: "The suprascapular nerve (C5-C6) innervates both supraspinatus and infraspinatus. It passes through the suprascapular notch and spinoglenoid notch, making it vulnerable to compression."
+            },
+            {
+                question: "Which muscle originates from the costal surface of the scapula?",
+                options: [
+                    "Subscapularis",
+                    "Serratus anterior", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Both subscapularis (from subscapular fossa) and serratus anterior (insertion on costal surface of medial border) are associated with the costal (anterior) surface of the scapula."
+            },
+            {
+                question: "What is the function of the rhomboid major and minor muscles?",
+                options: [
+                    "Scapular protraction",
+                    "Scapular retraction and downward rotation", 
+                    "Scapular elevation",
+                    "Scapular depression"
+                ],
+                correct: 1,
+                explanation: "Rhomboid major and minor function primarily in scapular retraction (pulling scapula toward spine) and downward rotation. They work with middle trapezius for postural support."
+            },
+            {
+                question: "Which muscle inserts on the coracoid process of the scapula?",
+                options: [
+                    "Pectoralis minor",
+                    "Coracobrachialis", 
+                    "Biceps brachii short head",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Pectoralis minor inserts on the coracoid process (originating from ribs 3-5), while coracobrachialis and biceps short head originate from it. The coracoid serves as an important attachment site."
+            },
+            {
+                question: "What clinical finding results from serratus anterior paralysis?",
+                options: [
+                    "Lateral scapular winging",
+                    "Medial scapular winging", 
+                    "Superior scapular elevation",
+                    "Inferior scapular depression"
+                ],
+                correct: 1,
+                explanation: "Serratus anterior paralysis causes medial scapular winging, where the medial border pulls away from the thoracic wall, especially during arm elevation. This results from long thoracic nerve injury."
+            },
+            {
+                question: "Which muscle originates from the superior angle of the scapula?",
+                options: [
+                    "Levator scapulae",
+                    "Rhomboid minor", 
+                    "Supraspinatus",
+                    "No muscle originates from superior angle"
+                ],
+                correct: 3,
+                explanation: "No major muscle originates from the superior angle of the scapula. The levator scapulae inserts nearby on the superior medial border, but doesn't originate from the angle itself."
+            },
+            {
+                question: "What is the nerve supply to the subscapularis muscle?",
+                options: [
+                    "Suprascapular nerve",
+                    "Upper and lower subscapular nerves", 
+                    "Axillary nerve",
+                    "Thoracodorsal nerve"
+                ],
+                correct: 1,
+                explanation: "Subscapularis is innervated by the upper and lower subscapular nerves (C5-C6) from the posterior cord of brachial plexus. The upper nerve may also supply teres major."
+            },
+            {
+                question: "Which muscle attaches to both the scapula and the hyoid bone?",
+                options: [
+                    "Sternohyoid",
+                    "Omohyoid", 
+                    "Sternothyroid",
+                    "Thyrohyoid"
+                ],
+                correct: 1,
+                explanation: "Omohyoid has two bellies connected by an intermediate tendon. The inferior belly originates from the superior scapular border, while the superior belly inserts on the hyoid bone."
+            },
+            {
+                question: "What is the primary action of the teres major muscle?",
+                options: [
+                    "Shoulder abduction",
+                    "Shoulder external rotation", 
+                    "Shoulder internal rotation, adduction, and extension",
+                    "Scapular retraction"
+                ],
+                correct: 2,
+                explanation: "Teres major functions in internal rotation, adduction, and extension of the shoulder. Due to similar functions, it's often called 'latissimus dorsi's little helper'."
+            },
+            {
+                question: "Which muscle originates from the medial 2/3 of the supraspinous fossa?",
+                options: [
+                    "Supraspinatus",
+                    "The entire supraspinatus muscle occupies the fossa", 
+                    "Only the anterior portion of supraspinatus",
+                    "Supraspinatus and infraspinatus share the fossa"
+                ],
+                correct: 1,
+                explanation: "The entire supraspinatus muscle originates from the medial 2/3 of the supraspinous fossa, with some fibers from the fascia covering the muscle."
+            },
+            {
+                question: "What nerve injury causes trapezius paralysis and lateral scapular winging?",
+                options: [
+                    "Long thoracic nerve",
+                    "Spinal accessory nerve (CN XI)", 
+                    "Dorsal scapular nerve",
+                    "Suprascapular nerve"
+                ],
+                correct: 1,
+                explanation: "Spinal accessory nerve (CN XI) injury causes trapezius paralysis, resulting in lateral scapular winging (inferior angle rotates laterally) and shoulder drooping."
+            },
+            {
+                question: "Which muscle has the most extensive origin from the scapula?",
+                options: [
+                    "Supraspinatus",
+                    "Infraspinatus", 
+                    "Subscapularis",
+                    "Teres major"
+                ],
+                correct: 2,
+                explanation: "Subscapularis has the most extensive origin, occupying nearly the entire subscapular fossa. This broad origin contributes to its strength as the primary internal rotator."
+            },
+            {
+                question: "What is the function of the coracobrachialis muscle?",
+                options: [
+                    "Shoulder abduction only",
+                    "Shoulder flexion and adduction", 
+                    "Shoulder extension only",
+                    "Scapular protraction"
+                ],
+                correct: 1,
+                explanation: "Coracobrachialis functions in shoulder flexion and adduction. It's the only muscle besides the short head of biceps that originates from the coracoid process."
+            },
+            {
+                question: "Which muscle inserts on the deltoid tuberosity but does not originate from the scapula?",
+                options: [
+                    "All deltoid fibers originate from scapula/clavicle",
+                    "Pectoralis major", 
+                    "Latissimus dorsi",
+                    "No such muscle exists"
+                ],
+                correct: 3,
+                explanation: "All muscles inserting on the deltoid tuberosity originate from the scapula or clavicle. The deltoid muscle itself has three scapular origins (acromion, spine) and one clavicular origin."
+            },
+            {
+                question: "What is the clinical significance of the 'rotator interval'?",
+                options: [
+                    "Site for biceps tendon passage",
+                    "Space between supraspinatus and subscapularis tendons", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "The rotator interval is the space between supraspinatus and subscapularis tendons through which the long head of biceps passes. Pathology here can cause shoulder instability and biceps tendinitis."
+            },
+            {
+                question: "Which muscle is primarily responsible for the first 15 degrees of shoulder abduction?",
+                options: [
+                    "Deltoid",
+                    "Supraspinatus", 
+                    "Infraspinatus",
+                    "Subscapularis"
+                ],
+                correct: 1,
+                explanation: "Supraspinatus is responsible for the initial 0-15° of shoulder abduction, after which the deltoid becomes the prime mover. This makes supraspinatus crucial for initiating overhead movements."
+            },
+            {
+                question: "What is the nerve supply to the teres minor muscle?",
+                options: [
+                    "Suprascapular nerve",
+                    "Axillary nerve", 
+                    "Lower subscapular nerve",
+                    "Radial nerve"
+                ],
+                correct: 1,
+                explanation: "Teres minor is innervated by the axillary nerve (C5-C6), specifically its posterior branch. The axillary nerve also supplies deltoid and provides sensation to the regimental badge area."
+            },
+            {
+                question: "Which two muscles form the 'posterior axillary fold'?",
+                options: [
+                    "Teres major and latissimus dorsi",
+                    "Teres minor and infraspinatus", 
+                    "Subscapularis and serratus anterior",
+                    "Trapezius and deltoid"
+                ],
+                correct: 0,
+                explanation: "Teres major and latissimus dorsi form the posterior axillary fold. Both are internal rotators and adductors, with teres major originating from the scapula and latissimus from the trunk."
+            },
+            {
+                question: "What is the primary function of the infraspinatus muscle?",
+                options: [
+                    "Shoulder internal rotation",
+                    "Shoulder external rotation", 
+                    "Shoulder abduction",
+                    "Scapular retraction"
+                ],
+                correct: 1,
+                explanation: "Infraspinatus is the primary external rotator of the shoulder, working with teres minor. External rotation strength is crucial for throwing athletes and overhead workers."
+            },
+            {
+                question: "Which muscle originates from both the scapula and the clavicle?",
+                options: [
+                    "Deltoid",
+                    "Pectoralis major", 
+                    "Biceps brachii",
+                    "Trapezius"
+                ],
+                correct: 3,
+                explanation: "Trapezius originates from the external occipital protuberance, nuchal ligament, and spinous processes C7-T12, and inserts on the lateral clavicle, acromion, and spine of scapula."
+            },
+            {
+                question: "What is the 'rotator cuff' composed of?",
+                options: [
+                    "Supraspinatus, infraspinatus, teres minor, subscapularis",
+                    "Deltoid, pectoralis major, latissimus dorsi", 
+                    "Trapezius, rhomboids, serratus anterior",
+                    "Biceps, triceps, coracobrachialis"
+                ],
+                correct: 0,
+                explanation: "The rotator cuff consists of supraspinatus, infraspinatus, teres minor, and subscapularis (SITS muscles). They provide dynamic stability to the glenohumeral joint."
+            },
+            {
+                question: "Which muscle is innervated by the dorsal scapular nerve?",
+                options: [
+                    "Rhomboid major and minor",
+                    "Levator scapulae", 
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "The dorsal scapular nerve (C5) innervates both rhomboid major and minor, and may contribute to levator scapulae innervation (which also receives C3-C4 branches)."
+            },
+            {
+                question: "What is the clinical test for serratus anterior function?",
+                options: [
+                    "Wall push-up test",
+                    "Shoulder shrug test", 
+                    "Empty can test",
+                    "Lift-off test"
+                ],
+                correct: 0,
+                explanation: "The wall push-up test assesses serratus anterior function. Medial scapular winging during wall push-ups indicates serratus weakness, typically from long thoracic nerve injury."
+            },
+            {
+                question: "Which muscle has the most superior attachment on the scapula?",
+                options: [
+                    "Supraspinatus",
+                    "Levator scapulae", 
+                    "Omohyoid",
+                    "Trapezius"
+                ],
+                correct: 1,
+                explanation: "Levator scapulae inserts on the superior medial border of the scapula, making it the most superior muscular attachment. This allows it to efficiently elevate the scapula."
+            },
+            {
+                question: "What is the function of the inferior fibers of trapezius?",
+                options: [
+                    "Scapular elevation",
+                    "Scapular depression and upward rotation", 
+                    "Scapular retraction",
+                    "Scapular protraction"
+                ],
+                correct: 1,
+                explanation: "The inferior fibers of trapezius function in scapular depression and upward rotation. They work with serratus anterior to position the scapula optimally for overhead activities."
+            },
+            {
+                question: "Which muscle is primarily tested with the 'empty can' test?",
+                options: [
+                    "Infraspinatus",
+                    "Supraspinatus", 
+                    "Subscapularis",
+                    "Teres minor"
+                ],
+                correct: 1,
+                explanation: "The empty can test (shoulder abduction to 90° with internal rotation) primarily tests supraspinatus function and is used to detect rotator cuff pathology."
+            }
+        ];
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionsSection = document.getElementById('questions-section');
+            const answerSection = document.getElementById('answer-section');
+            const answerBank = document.getElementById('answer-bank');
+            const submitBtn = document.getElementById('submit-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const resultsSection = document.getElementById('results-section');
+            const scoreValue = document.getElementById('score-value');
+            const attemptedValue = document.getElementById('attempted-value');
+            const passedValue = document.getElementById('passed-value');
+            const failedValue = document.getElementById('failed-value');
+            const detailedAnswers = document.getElementById('detailed-answers');
+            const shareTwitterBtn = document.getElementById('share-twitter');
+            const shareFacebookBtn = document.getElementById('share-facebook');
+            const shareWhatsappBtn = document.getElementById('share-whatsapp');
+            const shareCopyBtn = document.getElementById('share-copy');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let userAnswers = Array(quizData.length).fill(null);
+            
+            // Create question elements
+            quizData.forEach((questionData, index) => {
+                // Create question element for questions section
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${questionData.question}</div>
+                    <div class="options">
+                        ${questionData.options.map((option, optionIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optionIndex}">
+                                ${String.fromCharCode(65 + optionIndex)}. ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsSection.appendChild(questionElement);
+                
+                // Create answer element for answer bank
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-item';
+                answerElement.innerHTML = `
+                    <strong>${index + 1}. ${questionData.question}</strong><br>
+                    <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span>
+                `;
+                answerBank.appendChild(answerElement);
+            });
+            
+            // Update progress bar
+            function updateProgress() {
+                const answered = userAnswers.filter(answer => answer !== null).length;
+                const progress = (answered / quizData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    // Remove selected class from all options in this question
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${questionIndex}"]`);
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store user's answer
+                    userAnswers[questionIndex] = optionIndex;
+                    
+                    // Update progress
+                    updateProgress();
+                });
+            });
+            
+            // Submit button event listener
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                let attempted = 0;
+                let passed = 0;
+                let failed = 0;
+                
+                // Clear previous detailed answers
+                detailedAnswers.innerHTML = '';
+                
+                // Evaluate answers
+                quizData.forEach((questionData, index) => {
+                    const userAnswer = userAnswers[index];
+                    const correctAnswer = questionData.correct;
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${index}"]`);
+                    
+                    if (userAnswer !== null) {
+                        attempted++;
+                        
+                        // Mark correct/incorrect answers
+                        questionOptions.forEach((option, optionIndex) => {
+                            if (optionIndex === correctAnswer) {
+                                option.classList.add('correct');
+                            } else if (optionIndex === userAnswer && userAnswer !== correctAnswer) {
+                                option.classList.add('incorrect');
+                            }
+                        });
+                        
+                        if (userAnswer === correctAnswer) {
+                            score++;
+                            passed++;
+                        } else {
+                            failed++;
+                        }
+                        
+                        // Create detailed answer element
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        const userAnswerClass = userAnswer === correctAnswer ? 'answer-correct' : 'answer-incorrect';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="${userAnswerClass}">Your answer: ${userAnswer !== null ? String.fromCharCode(65 + userAnswer) + '. ' + questionData.options[userAnswer] : 'Not attempted'}</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    } else {
+                        // Create detailed answer for unattempted question
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="answer-incorrect">Your answer: Not attempted</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    }
+                });
+                
+                // Update score and stats
+                scoreValue.textContent = `${score}/${quizData.length}`;
+                attemptedValue.textContent = attempted;
+                passedValue.textContent = passed;
+                failedValue.textContent = failed;
+                
+                // Show results section and answer section
+                resultsSection.style.display = 'block';
+                answerSection.classList.add('visible');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset button event listener
+            resetBtn.addEventListener('click', function() {
+                userAnswers = Array(quizData.length).fill(null);
+                
+                // Clear all selections
+                document.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Hide results section and answer section
+                resultsSection.style.display = 'none';
+                answerSection.classList.remove('visible');
+                
+                // Reset progress bar
+                progressBar.style.width = '0%';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Share buttons functionality
+            shareTwitterBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Scapular Muscular Attachments Quiz! Test your knowledge too.`;
+                const url = window.location.href;
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareFacebookBtn.addEventListener('click', function() {
+                const url = window.location.href;
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareWhatsappBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Scapular Muscular Attachments Quiz! Test your knowledge too: ${window.location.href}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            });
+            
+            shareCopyBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const attempted = document.getElementById('attempted-value').textContent;
+                const passed = document.getElementById('passed-value').textContent;
+                const text = `Scapular Muscular Attachments Quiz Results:
+Score: ${score}
+Questions Attempted: ${attempted}
+Questions Passed: ${passed}
+Test your knowledge: ${window.location.href}`;
+                
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('Results copied to clipboard!');
+                }, function() {
+                    alert('Failed to copy results. Please try again.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
